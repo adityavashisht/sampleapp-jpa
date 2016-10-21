@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by vashishta on 10/17/16.
@@ -19,6 +20,20 @@ public class PersonService {
 
 
     public Person getById(Long id) {
-        return entityManager.find(Person.class,id);
+        return entityManager.find(Person.class, id);
+    }
+
+    /**
+     * @param person
+     * @return
+     */
+    public Person save(Person person) {
+
+        entityManager.merge(person);
+        return person;
+    }
+
+    public List<Person> getAll() {
+        return entityManager.createQuery("select p from Person p").getResultList();
     }
 }
