@@ -3,6 +3,7 @@ package com.indasil.sampleapp.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by vashishta on 10/17/16.
@@ -24,8 +25,18 @@ public class Person {
     @Column(name="first_name")
     private String name;
 
+    @Column(name="dob")
+    Date dob;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 }

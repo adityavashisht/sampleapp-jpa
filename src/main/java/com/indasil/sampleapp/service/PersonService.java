@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class PersonService {
      * @return
      */
     public Person save(Person person) {
-
+        person.setDob(new Date());
         entityManager.merge(person);
         return person;
     }
