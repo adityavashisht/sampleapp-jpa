@@ -63,6 +63,7 @@
                 <div class="form-group">
                     <label class="control-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name">
+                    <span class="text-danger"></span>
                 </div>
 
                 <button type="button" id="savePerson" class="btn btn-success">Add Person</button>
@@ -132,6 +133,21 @@
 
             },
             error: function (data) {
+
+                $.each(data, function (key, value) {
+                    if(key==="responseJSON") {
+                        var message = value.name;
+                        console.log(message);
+                        var keyValueArray = message.split(':');
+                        var idKey = keyValueArray[0];
+                        var messageValue = keyValueArray[1];
+
+                        $("#" + idKey).parent().addClass("has-error");
+                        $("#" + idKey).next().text(messageValue);
+                    }
+
+                });
+
             }
         });
     }

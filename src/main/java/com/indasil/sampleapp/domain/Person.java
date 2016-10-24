@@ -28,6 +28,18 @@ public class Person {
     @Column(name="dob")
     Date dob;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

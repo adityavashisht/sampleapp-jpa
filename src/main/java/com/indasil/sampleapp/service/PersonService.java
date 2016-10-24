@@ -24,6 +24,16 @@ public class PersonService {
         return entityManager.find(Person.class, id);
     }
 
+
+    public Person getByName(String name) {
+        Person person = null;
+        List<Person> personList = entityManager.createQuery("select p from Person p where p.name=?").setParameter(1, name).getResultList();
+        if (personList != null && personList.size() > 0) {
+            person = personList.get(0);
+        }
+        return person;
+    }
+
     /**
      * @param person
      * @return
