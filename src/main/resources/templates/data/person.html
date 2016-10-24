@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Name</label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="name" id="name">
                 </div>
 
                 <button type="button" id="savePerson" class="btn btn-success">Add Person</button>
@@ -110,12 +110,16 @@
     function doWithAjax() {
         var personData = $("#person").serialize();
 
+        var personJson = {};
+        personJson.name = $("#name").val();
+
         var URL = './person/save';
 
         $.ajax({
             type: "POST",
             url: URL,
-            data: personData,
+            data: JSON.stringify(personJson),
+            contentType:'application/json',
             dataType: 'json',
             success: function (data) {
                 var dom = '';

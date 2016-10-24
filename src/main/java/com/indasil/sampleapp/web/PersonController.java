@@ -4,6 +4,7 @@ import com.indasil.sampleapp.domain.Person;
 import com.indasil.sampleapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,13 @@ public class PersonController {
     @ResponseBody
     @PostMapping(path = "/person/save")
     public ResponseEntity<List<Person>> save(@ModelAttribute("person") Person person, BindingResult result) {
+        personService.save(person);
+        return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PostMapping(path = "/person/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Person>> withBody(@RequestBody Person person, BindingResult result) {
         personService.save(person);
         return new ResponseEntity<>(personService.getAll(), HttpStatus.OK);
     }
